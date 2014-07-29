@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#
+#  Build the test program using the gif module.
+#
+#  Requires:
+#    -- FoBiS -- https://github.com/szaghi/FoBiS
+#    -- ROBODoc -- http://rfsber.home.xs4all.nl/Robo/
+#
+
 echo ""
 echo "build test program..."
 echo ""
