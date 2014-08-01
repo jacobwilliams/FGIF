@@ -66,13 +66,6 @@
     ystep = (ymax-ymin)/height
         
     allocate(pixel(nframes,width,height))
-       
-    if (nframes>1) then
-        do iframe=1,nframes
-            maxiter = 1 + (iframe-1)*(nmax/nframes)
-            write(*,*) 'maxiter=',maxiter
-        end do    !iframe
-    end if
     
     tstart = omp_get_wtime()    
     
@@ -86,9 +79,7 @@
         
         maxiter = nmax
                 
-        !$omp parallel &
-        !$omp shared (pixel) &
-        !$omp private (ix,iy,x,y,c,z,n)
+        !$omp parallel shared (pixel) private (ix,iy,x,y,c,z,n)
         !$omp do     
     
         do ix=1,width
