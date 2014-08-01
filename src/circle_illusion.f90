@@ -24,7 +24,7 @@
     
     logical,parameter :: new = .true.
     
-    integer,parameter  :: n        = 500  !550  !size of image (square)     
+    integer,parameter  :: n        = 200  !550  !size of image (square)     
     real(wp),parameter :: rcircle  = n/2  !250  !radius of the big circle
     integer,parameter  :: time_sep = 5    !deg
         
@@ -101,7 +101,7 @@
                 if (new) then
                     !call draw_circle(row,col,black,10)  !v2
                     !call draw_circle(row,col,m,5)       !v2
-                    call draw_circle(row,col,mod(j,3)+3,10)   !v3
+                    call draw_circle(row,col,mod(j,3)+3,5)   !v3
                 else
                     call draw_square(row,col,red)        !v1
                 end if
