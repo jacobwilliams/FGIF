@@ -1,4 +1,6 @@
-mod/
-obj/
 doc/
+bin/
+lib/
 
+*.o
+*.mod

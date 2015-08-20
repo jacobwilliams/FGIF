@@ -1,19 +1,10 @@
 !*****************************************************************************************
-!****h* FGIF/circle_illusion
+!> author: Jacob Williams
 !
-!  NAME
-!    circle_illusion
+!  Use the gif module to create a sample animated gif.
 !
-!  DESCRIPTION
-!    Use the gif module to create a sample animated gif.
-!
-!  SEE ALSO
-!    [1] http://codegolf.stackexchange.com/questions/34887/make-a-circle-illusion-animation
-!
-!  AUTHOR
-!    Jacob Williams
-!
-!  SOURCE
+!# See also
+!  * [Make a circle illusion animation](http://codegolf.stackexchange.com/questions/34887/make-a-circle-illusion-animation)
     
     program circle_illusion
     
@@ -24,13 +15,13 @@
     
     logical,parameter :: new = .true.
     
-    integer,parameter  :: n        = 200  !550  !size of image (square)     
-    real(wp),parameter :: rcircle  = n/2  !250  !radius of the big circle
-    integer,parameter  :: time_sep = 5    !deg
+    integer,parameter  :: n        = 200  !! size of image (square)     
+    real(wp),parameter :: rcircle  = n/2  !! radius of the big circle
+    integer,parameter  :: time_sep = 5    !! deg
         
     real(wp),parameter :: deg2rad = acos(-1.0_wp)/180.0_wp
     
-    integer,dimension(:,:,:),allocatable :: pixel    ! pixel values
+    integer,dimension(:,:,:),allocatable :: pixel    !! pixel values
      
     real(wp),dimension(2) :: xy
     integer,dimension(2)  :: ixy
@@ -45,6 +36,7 @@
     integer,parameter  :: green = 3    
     integer,parameter  :: blue  = 4    
     integer,parameter  :: black = 5
+    
     colormap(:,black) = [0,0,0]      
     colormap(:,white) = [255,255,255]
     colormap(:,gray)  = [200,200,200] 
@@ -99,11 +91,11 @@
                 call spherical_to_cartesian(r,t,xy)
                 call convert(xy,row,col)
                 if (new) then
-                    !call draw_circle(row,col,black,10)  !v2
-                    !call draw_circle(row,col,m,5)       !v2
-                    call draw_circle(row,col,mod(j,3)+3,5)   !v3
+                    !call draw_circle(row,col,black,10)    !v2
+                    !call draw_circle(row,col,m,5)         !v2
+                    call draw_circle(row,col,mod(j,3)+3,5) !v3
                 else
-                    call draw_square(row,col,red)        !v1
+                    call draw_square(row,col,red)          !v1
                 end if
             end do
         end do
@@ -115,25 +107,19 @@
     deallocate(pixel)
     
     contains
-    
-!   internal routines: draw_square, draw_circle, convert, spherical_to_cartesian
 !*****************************************************************************************
     
     !*************************************************************************************
-    !****if* circle_illusion/draw_square
+    !> author: Jacob Williams
     !
-    !  NAME
-    !    draw_square
-    !
-    !  DESCRIPTION
-    !
-    !  SOURCE
+    !  Draw a square.
 
         subroutine draw_square(r,c,icolor)
     
         implicit none
-        integer,intent(in) :: r,c  !row,col of center
-        integer,intent(in) :: icolor
+        integer,intent(in) :: r      !! row of center
+        integer,intent(in) :: c      !! col of center
+        integer,intent(in) :: icolor !! color value
             
         integer,parameter :: d = 10 !square size
 
@@ -143,21 +129,18 @@
     !*************************************************************************************
 
     !*************************************************************************************
-    !****if* circle_illusion/draw_circle
+    !> author: Jacob Williams
     !
-    !  NAME
-    !    draw_circle
-    !
-    !  DESCRIPTION
-    !
-    !  SOURCE
+    !  Draw a circle.
 
         subroutine draw_circle(r,c,icolor,d)
     
         implicit none
-        integer,intent(in) :: r,c  !row,col of center
-        integer,intent(in) :: icolor
-        integer,intent(in) :: d  !diameter
+        
+        integer,intent(in) :: r      !! row of center
+        integer,intent(in) :: c      !! col of center
+        integer,intent(in) :: icolor !! color value
+        integer,intent(in) :: d      !! diameter
     
         integer :: i,j
          
@@ -172,20 +155,17 @@
     !*************************************************************************************
             
     !*************************************************************************************
-    !****if* circle_illusion/convert
+    !> author: Jacob Williams
     !
-    !  NAME
-    !    convert
-    !
-    !  DESCRIPTION
-    !
-    !  SOURCE
+    !  Convert from x,y to row,col.
 
         subroutine convert(xy,row,col)
     
         implicit none
-        real(wp),dimension(2),intent(in) :: xy  !coordinates
-        integer,intent(out) :: row,col
+        
+        real(wp),dimension(2),intent(in) :: xy  !! coordinates
+        integer,intent(out) :: row
+        integer,intent(out) :: col
     
         row = int(-xy(2) + n/2.0_wp)
         col = int( xy(1) + n/2.0_wp)
@@ -194,19 +174,16 @@
     !*************************************************************************************
     
     !*************************************************************************************
-    !****if* circle_illusion/spherical_to_cartesian
+    !> author: Jacob Williams
     !
-    !  NAME
-    !    spherical_to_cartesian
-    !
-    !  DESCRIPTION
-    !
-    !  SOURCE
+    !  Convert spherical to cartesian coordinates.
 
         subroutine spherical_to_cartesian(r,theta,xy)
     
         implicit none
-        real(wp),intent(in) :: r,theta
+        
+        real(wp),intent(in) :: r
+        real(wp),intent(in) :: theta
         real(wp),dimension(2),intent(out) :: xy
     
         xy(1) = r * cos(theta)

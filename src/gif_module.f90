@@ -1,24 +1,19 @@
 !*****************************************************************************************
+!>
+!  Conversion of raster data to GIF89 format.
+!
+!# See also
+!   * The original code (Licence: public domain) was from
+!     [here](http://fortranwiki.org/fortran/show/writegif)
+!
+!# History
+!   * Version 1.01, August 1999, Written by Jos Bergervoet
+!   * 2008 Jan 28: Modified by Clive Page to use stream I/O, array as colourmap.
+!   * Jacob Williams, 7/27/2014. Refactored, updated, added ability to export animated gifs.
+!
+!*****************************************************************************************
+
     module gif_module
-!*****************************************************************************************
-!****h* FGIF/gif_module
-!
-!  NAME
-!    gif_module
-!
-!  DESCRIPTION
-!    Conversion of raster data to GIF89 format.
-!
-!  SEE ALSO
-!    [1] The original code (Licence: public domain) was from:
-!        http://fortranwiki.org/fortran/show/writegif
-!
-!  HISTORY
-!    -Version 1.01, August 1999, Written by Jos Bergervoet
-!    -2008 Jan 28: Modified by Clive Page to use stream I/O, array as colourmap.
-!    -J. Williams, 7/27/2014. Refactored, updated, added ability to export animated gifs.
-!
-!*****************************************************************************************
 
     implicit none
 
@@ -30,40 +25,33 @@
 !*****************************************************************************************
 
 !*****************************************************************************************
-!****f* gif_module/write_animated_gif
+!> author: Jacob Williams
+!  date: 7/27/2014
 !
-!  NAME
-!    write_animated_gif
+!  Writes gif89 image, given pixel array and color map
+!  This version can create an animated gif:
 !
-!  DESCRIPTION
-!    Writes gif89 image, given pixel array and color map
-!    This version can create an animated gif:
-!        The pixel matrix is rank 3: image i is pixel(i,:,:)
-!        If size(pixel,1) is 1, then a regular gif is produced.
+!  * The pixel matrix is rank 3: image i is pixel(i,:,:)
+!  * If size(pixel,1) is 1, then a regular gif is produced.
 !
-!  SEE ALSO
-!    [1] http://fortranwiki.org/fortran/show/writegif
-!    [2] http://www.onicos.com/staff/iz/formats/gif.html#aeb
-!    [3] http://www.fileformat.info/format/gif/egff.htm
-!
-!  AUTHOR
-!    Jacob Williams, 7/27/2014
-!  
-!  SOURCE
+!# See also
+!   1. [writegif](http://fortranwiki.org/fortran/show/writegif)
+!   2. [GIF format](http://www.onicos.com/staff/iz/formats/gif.html#aeb)
+!   3. [GIF File Format Summary](http://www.fileformat.info/format/gif/egff.htm)
 
     subroutine write_animated_gif(filename,pixel,colormap,transparent,delay)
     
-    character(len=*),intent(in)         :: filename    ! file to create or replace
-    integer,intent(in),dimension(:,:,:) :: pixel       ! pixel values [0 to ncol]
-    integer,intent(in),dimension(:,0:)  :: colormap    ! [r,g,b (0:255)] , [0:ncol] colors
-    integer,intent(in),optional         :: transparent ! transparent color
-    integer,intent(in),optional         :: delay       ! delay time [1/100 of seconds]
+    character(len=*),intent(in)         :: filename    !! file to create or replace
+    integer,intent(in),dimension(:,:,:) :: pixel       !! pixel values [0 to ncol]
+    integer,intent(in),dimension(:,0:)  :: colormap    !! [r,g,b (0:255)] , [0:ncol] colors
+    integer,intent(in),optional         :: transparent !! transparent color
+    integer,intent(in),optional         :: delay       !! delay time [1/100 of seconds]
 
     integer,parameter     :: bufend=260
     character(len=bufend) :: buf
     integer               :: ibuf ! output buffer vars
     integer,parameter     :: maxcode = 4095 
-    integer,parameter     :: nocode = maxcode+1 ! definitions for lzw
+    integer,parameter     :: nocode = maxcode+1 !! definitions for lzw
 
     ! define lzw code tables for hashing:
     !
@@ -222,20 +210,11 @@
     close(unit=iunit,iostat=istat)
     
     contains
-    
-!    Internal routines: char2, flushbuffer, giflzw, inittable, slicewrite
 !*****************************************************************************************
     
     !*************************************************************************************
-    !****if* gif_module/char2
-    !
-    !  NAME
-    !    char2
-    !
-    !  DESCRIPTION
-    !    Convert the two least sig bytes of an integer to a 2-character string
-    !
-    !  SOURCE
+    !>
+    !  Convert the two least sig bytes of an integer to a 2-character string
 
         function char2(ival) result(c)
     
@@ -248,24 +227,17 @@
     !*************************************************************************************
 
     !*************************************************************************************
-    !****if* gif_module/flushbuffer
-    !
-    !  NAME
-    !    flushbuffer
-    !
-    !  DESCRIPTION
-    !    Flushes up to 255 bytes to output file if buffer contains data, keeping
-    !    rest of data in buffer. If skip>0 there is a partially filled last byte
-    !    in buf[ibuf]. This byte will be written only if ibuf<256. That should be
-    !    the last call to flushbuffer.
-    !
-    !  SOURCE
+    !>
+    !  Flushes up to 255 bytes to output file if buffer contains data, keeping
+    !  rest of data in buffer. If skip>0 there is a partially filled last byte
+    !  in buf[ibuf]. This byte will be written only if ibuf<256. That should be
+    !  the last call to flushbuffer.
 
         subroutine flushbuffer(iunit)
 
-        integer, intent(in) :: iunit   ! i/o unit to use
+        integer, intent(in) :: iunit   !! i/o unit to use
     
-        integer :: bl   ! number of bytes to write (to be determined)
+        integer :: bl   !! number of bytes to write (to be determined)
 
         if (ibuf > 255) then     ! we will write buf[1..255]
             bl = 255
@@ -286,21 +258,15 @@
     !*************************************************************************************
 
     !*************************************************************************************
-    !****if* gif_module/giflzw
-    !
-    !  NAME
-    !    giflzw
-    !
-    !  DESCRIPTION
-    !    routine for LZW coding
-    !
-    !  SOURCE
+    !>
+    !  routine for LZW coding
 
         subroutine giflzw(iunit, pixel)          
 
         integer, intent(in)                 :: iunit
         integer, intent(in), dimension(:,:) :: pixel
-        integer                             :: i, j
+        integer                             :: i
+        integer                             :: j
 
         nout=0                        ! for counting the codes going out
         if (blen<2) then
@@ -358,14 +324,8 @@
     !*************************************************************************************
 
     !*************************************************************************************
-    !****if* gif_module/inittable
-    !
-    !  NAME
-    !    inittable
-    !
-    !  DESCRIPTION
-    !
-    !  SOURCE
+    !>
+    !  Initialize table.
 
         subroutine inittable()
 
@@ -386,15 +346,8 @@
     !*************************************************************************************
 
     !*************************************************************************************
-    !****if* gif_module/slicewrite
-    !
-    !  NAME
-    !    slicewrite
-    !
-    !  DESCRIPTION
-    !    add some bits (a 'slice') to output buffer
-    !
-    !  SOURCE
+    !>
+    !  add some bits (a 'slice') to output buffer
 
         subroutine slicewrite(iunit, code) 
     

@@ -1,23 +1,12 @@
 !*****************************************************************************************
-!****h* FGIF/mandelbrot_example
+!> author: Jacob Williams
+!  date: 7/31/2014
 !
-!  NAME
-!    mandelbrot_example
+!  Use the gif module to create Mandelbrot set images.
 !
-!  DESCRIPTION
-!    Use the gif module to create Mandelbrot set images.
-!
-!    Uses OpenMP
-!
-!    Compile with -fopenmp
-!
-!    Set number of threads from bash:
-!    export OMP_NUM_THREADS=4
-!
-!  AUTHOR
-!    Jacob Williams, 7/31/2014
-!
-!  SOURCE
+!# Using OpenMP
+!  * Compile with `-fopenmp`
+!  * Set number of threads from bash: `export OMP_NUM_THREADS=4`
     
     program mandelbrot_example
     
@@ -27,7 +16,7 @@
     implicit none
     
     integer :: i,ix,iy,n
-    integer,dimension(:,:,:),allocatable :: pixel    ! pixel values
+    integer,dimension(:,:,:),allocatable :: pixel    !! pixel values
     integer,dimension(:,:),allocatable  :: colormap 
     real(wp) :: xmin,xmax,ymin,ymax,xstep,ystep,x,y,tmp
     integer :: width, height, iframe, maxiter
