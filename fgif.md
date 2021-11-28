@@ -1,6 +1,7 @@
 project: fgif
 project_dir: ./src
 output_dir: ./doc
+media_dir: ./media
 project_github: https://github.com/jacobwilliams/FGIF
 summary: Create Animated GIFs with Fortran
 author: Jacob Williams
@@ -10,10 +11,8 @@ predocmark: <
 docmark_alt:
 docmark: !
 display: public
-display: protected
+         protected
 source: true
+graph: false
 
-Create Animated GIFs with Fortran.
-
-Just a simple module that can be used to create GIFs and animated GIFs with Fortran.
-Based on the public domain code at: http://fortranwiki.org/fortran/show/writegif
+{!README.md!}

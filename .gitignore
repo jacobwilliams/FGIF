@@ -1,6 +1,10 @@
-doc/
-bin/
-lib/
+/build
+/lib
+/doc
+/bin
 
 *.o
 *.mod
+
+.DS_Store
+
