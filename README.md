@@ -1,10 +1,10 @@
 ![fgif](media/mandelbrot.gif)
 ============
 
-[![GitHub release](https://img.shields.io/github/release/jacobwilliams/fgif.svg)](https://github.com/jacobwilliams/fgif/releases/latest)
-[![Build Status](https://github.com/jacobwilliams/fgif/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/fgif/actions)
-[![codecov](https://codecov.io/gh/jacobwilliams/fgif/branch/master/graph/badge.svg?token=43HK33CSMY)](https://codecov.io/gh/jacobwilliams/fgif)
-[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/fgif)](https://github.com/jacobwilliams/fgif/commits/master)
+[![GitHub release](https://img.shields.io/github/release/jacobwilliams/FGIF.svg)](https://github.com/jacobwilliams/FGIF/releases/latest)
+[![Build Status](https://github.com/jacobwilliams/FGIF/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/FGIF/actions)
+[![codecov](https://codecov.io/gh/jacobwilliams/FGIF/branch/master/graph/badge.svg)](https://codecov.io/gh/jacobwilliams/FGIF)
+[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/FGIF)](https://github.com/jacobwilliams/FGIF/commits/master)
 
 FGIF: Create Animated GIFs with Fortran
 
@@ -35,4 +35,4 @@ fgif = { git="https://github.com/jacobwilliams/fgif.git" }
 
 ### Documentation
 
-The latest API documentation can be found [here](http://jacobwilliams.github.io/fgif/). This was generated from the source code using [FORD](https://github.com/Fortran-FOSS-Programmers/ford).
+The latest API documentation can be found [here](http://jacobwilliams.github.io/FGIF/). This was generated from the source code using [FORD](https://github.com/Fortran-FOSS-Programmers/ford).
