@@ -1,6 +1,11 @@
 ![fgif](media/mandelbrot.gif)
 ============
 
+[![GitHub release](https://img.shields.io/github/release/jacobwilliams/fgif.svg)](https://github.com/jacobwilliams/fgif/releases/latest)
+[![Build Status](https://github.com/jacobwilliams/fgif/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/fgif/actions)
+[![codecov](https://codecov.io/gh/jacobwilliams/fgif/branch/master/graph/badge.svg?token=43HK33CSMY)](https://codecov.io/gh/jacobwilliams/fgif)
+[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/fgif)](https://github.com/jacobwilliams/fgif/commits/master)
+
 FGIF: Create Animated GIFs with Fortran
 
 ### Description
