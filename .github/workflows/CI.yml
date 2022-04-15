@@ -50,10 +50,10 @@ jobs:
            --slave /usr/bin/gcov gcov /usr/bin/gcov-${{ matrix.gcc_v }}
 
     # - name: Compile
-    #   run: fpm build --profile release
+    #   run: fpm build --profile release --flag -fopenmp
 
     - name: Run tests
-      run: fpm test --profile debug --flag -coverage
+      run: fpm test --profile debug --flag -coverage --flag -fopenmp
 
     - name: Create coverage report
       run: |
