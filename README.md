@@ -32,3 +32,7 @@ To use `fgif` within your fpm project, add the following to your `fpm.toml` file
 [dependencies]
 fgif = { git="https://github.com/jacobwilliams/fgif.git" }
 ```
+
+### Documentation
+
+The latest API documentation can be found [here](http://jacobwilliams.github.io/fgif/). This was generated from the source code using [FORD](https://github.com/Fortran-FOSS-Programmers/ford).
