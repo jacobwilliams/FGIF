@@ -18,13 +18,13 @@ Based on the public domain code at: http://fortranwiki.org/fortran/show/writegif
 A `fmp.toml` file is provided for compiling `fgif` with the [Fortran Package Manager](https://github.com/fortran-lang/fpm). For example, to build:
 
 ```
-  fpm build --profile release
+  fpm build --profile release --flag "-fopenmp"
 ```
 
 And to run the unit tests:
 
 ```
-  fpm test --profile release
+  fpm test --profile release --flag "-fopenmp"
 ```
 
 To use `fgif` within your fpm project, add the following to your `fpm.toml` file:
