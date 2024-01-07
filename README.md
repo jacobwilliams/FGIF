@@ -15,7 +15,7 @@ Based on the public domain code at: http://fortranwiki.org/fortran/show/writegif
 
 ### Compiling
 
-A `fmp.toml` file is provided for compiling `fgif` with the [Fortran Package Manager](https://github.com/fortran-lang/fpm). For example, to build:
+A `fpm.toml` file is provided for compiling `fgif` with the [Fortran Package Manager](https://github.com/fortran-lang/fpm). For example, to build:
 
 ```
   fpm build --profile release --flag "-fopenmp"
