@@ -12,9 +12,6 @@ jobs:
         os: [ubuntu-latest]
         gcc_v: [14] # Version of GFortran we want to use.
         python-version: [3.12]
-    env:
-      FC: gfortran-${{ matrix.gcc_v }}
-      GCC_V: ${{ matrix.gcc_v }}
 
     steps:
     - name: Checkout code
@@ -35,6 +32,12 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Setup Fortran compiler
+      uses: fortran-lang/setup-fortran@v1.10.0
+      with:
+        compiler: gcc
+        version: ${{ matrix.gcc_v }}
+
     - name: Install Python dependencies
       if: contains( matrix.os, 'ubuntu')
       run: |
@@ -42,17 +45,10 @@ jobs:
         pip install ford numpy matplotlib
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Install GFortran Linux
+    - name: Install coverage tools
       if: contains( matrix.os, 'ubuntu')
       run: |
         sudo apt-get install lcov
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt-get install -y gcc-${{ matrix.gcc_v }} gfortran-${{ matrix.gcc_v }}
-        sudo update-alternatives \
-           --install /usr/bin/gcc gcc /usr/bin/gcc-${{ matrix.gcc_v }} 100 \
-           --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-${{ matrix.gcc_v }} \
-           --slave /usr/bin/gcov gcov /usr/bin/gcov-${{ matrix.gcc_v }}
 
     # - name: Compile
     #   run: fpm build --profile release --flag -fopenmp
