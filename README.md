@@ -1,6 +1,3 @@
-![fgif](media/mandelbrot.gif)
-============
-
 [![GitHub release](https://img.shields.io/github/release/jacobwilliams/FGIF.svg)](https://github.com/jacobwilliams/FGIF/releases/latest)
 [![Build Status](https://github.com/jacobwilliams/FGIF/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/FGIF/actions)
 [![codecov](https://codecov.io/gh/jacobwilliams/FGIF/branch/master/graph/badge.svg)](https://codecov.io/gh/jacobwilliams/FGIF)
@@ -36,3 +33,10 @@ fgif = { git="https://github.com/jacobwilliams/fgif.git" }
 ### Documentation
 
 The latest API documentation can be found [here](http://jacobwilliams.github.io/FGIF/). This was generated from the source code using [FORD](https://github.com/Fortran-FOSS-Programmers/ford).
+
+### Examples
+
+![fgif](media/mandelbrot.gif)
+![fgif](media/animated_gif_1.gif)
+![fgif](media/game_of_life.gif)
+![fgif](media/plasma.gif)
