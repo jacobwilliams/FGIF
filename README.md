@@ -41,3 +41,4 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 ![fgif](media/game_of_life.gif)
 ![fgif](media/plasma.gif)
 ![fgif](media/tsp.gif)
+![fgif](media/maze.gif)
