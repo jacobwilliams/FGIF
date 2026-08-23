@@ -248,8 +248,9 @@
                     color = c_wall
                 end if
 
-                !color solver progress only at cell positions (odd,odd):
-                if (mod(gi,2)==1 .and. mod(gj,2)==1) then
+                !color solver progress only at cell positions (odd,odd, excluding
+                !the outer border row/column, which is also odd but is not a cell):
+                if (mod(gi,2)==1 .and. mod(gj,2)==1 .and. gi<gh .and. gj<gw) then
                     r = (gi+1)/2
                     c = (gj+1)/2
                     if (present(solver_visited)) then
