@@ -223,16 +223,20 @@
         logical,intent(in),optional                :: force
 
         integer :: gi,gj,r,c,color,x0,x1,y0,y1,k
-        logical,dimension(n_rows,n_cols) :: on_path
+        logical,dimension(gh,gw) :: on_path_grid
 
         if (iframe>=max_frames .and. .not. present(force)) return
 
         iframe = min(iframe+1,max_frames)
 
-        on_path = .false.
+        on_path_grid = .false.
         if (present(path)) then
             do k=1,size(path,1)
-                on_path(path(k,1),path(k,2)) = .true.
+                on_path_grid(2*path(k,1)-1,2*path(k,2)-1) = .true.
+                !also mark the connecting doorway between consecutive path cells,
+                !otherwise the path looks dashed (gaps at every wall crossing):
+                if (k<size(path,1)) &
+                    on_path_grid(path(k,1)+path(k+1,1)-1,path(k,2)+path(k+1,2)-1) = .true.
             end do
         end if
 
@@ -244,20 +248,21 @@
                     color = c_wall
                 end if
 
-                !color solver progress/path only at cell positions (odd,odd):
+                !color solver progress only at cell positions (odd,odd):
                 if (mod(gi,2)==1 .and. mod(gj,2)==1) then
                     r = (gi+1)/2
                     c = (gj+1)/2
                     if (present(solver_visited)) then
                         if (solver_visited(r,c)) color = c_visited
                     end if
-                    if (on_path(r,c)) color = c_path
                     if (r==1 .and. c==1) color = c_start
                     if (r==n_rows .and. c==n_cols) color = c_goal
                     if (present(active_r)) then
                         if (r==active_r .and. c==active_c) color = c_active
                     end if
                 end if
+
+                if (on_path_grid(gi,gj)) color = c_path
 
                 x0 = (gj-1)*cell_px+1
                 x1 = gj*cell_px
