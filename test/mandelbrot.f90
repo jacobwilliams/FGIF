@@ -23,7 +23,13 @@
     complex(wp) :: z, c
     real(wp) :: tstart,tend
 
-    real(wp),external :: omp_get_wtime  !OpenMP routine
+    interface
+    real(wp) function omp_get_wtime()
+        !! OpenMP routine
+        import
+        implicit none
+        end function omp_get_wtime
+    end interface
 
     integer, parameter :: nmax = 1000
     integer, parameter :: nframes = 11
