@@ -42,3 +42,5 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 ![fgif](media/plasma.gif)
 ![fgif](media/tsp.gif)
 ![fgif](media/maze.gif)
+![fgif](media/rotating_cube.gif)
+![fgif](media/lsystem_plant.gif)
