@@ -5,12 +5,12 @@
 
 FGIF: Create Animated GIFs with Fortran
 
-### Description
+## Description
 
 Just a simple module that can be used to create GIFs and animated GIFs with Fortran.
 Based on the public domain code at: http://fortranwiki.org/fortran/show/writegif
 
-### Compiling
+## Compiling
 
 A `fpm.toml` file is provided for compiling `fgif` with the [Fortran Package Manager](https://github.com/fortran-lang/fpm). For example, to build:
 
@@ -30,22 +30,48 @@ To use `fgif` within your fpm project, add the following to your `fpm.toml` file
 fgif = { git="https://github.com/jacobwilliams/fgif.git" }
 ```
 
-### Documentation
+## Documentation
 
 The latest API documentation can be found [here](http://jacobwilliams.github.io/FGIF/). This was generated from the source code using [FORD](https://github.com/Fortran-FOSS-Programmers/ford).
 
-### Examples
+## Examples
+
+### Mandelbrot
 
 ![mandelbrot](media/mandelbrot.gif)
+
+### Circle illusion
 ![animated_gif_1](media/animated_gif_1.gif)
+
+### Game of Life
 ![game_of_life](media/game_of_life.gif)
+
+### Plasma
 ![plasma](media/plasma.gif)
+
+### Traveling Salesman Problem
 ![tsp](media/tsp.gif)
+
+### Maze generation and solving
 ![maze](media/maze.gif)
+
+### Rotating wireframe cube
 ![rotating_cube](media/rotating_cube.gif)
+
+### L-system plant growth
 ![lsystem_plant](media/lsystem_plant.gif)
+
+### N-body gravity simulation
 ![nbody](media/nbody.gif)
+
+### Falling sand
 ![falling_sand](media/falling_sand.gif)
+
+### Boids flocking simulation
 ![boids](media/boids.gif)
+
+### A* pathfinding
 ![pathfinding](media/pathfinding.gif)
+
+### Rotating wireframe sphere
 ![rotating_sphere](media/rotating_sphere.gif)
