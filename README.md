@@ -46,3 +46,4 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 ![fgif](media/lsystem_plant.gif)
 ![fgif](media/nbody.gif)
 ![fgif](media/falling_sand.gif)
+![fgif](media/boids.gif)
