@@ -44,3 +44,5 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 ![fgif](media/maze.gif)
 ![fgif](media/rotating_cube.gif)
 ![fgif](media/lsystem_plant.gif)
+![fgif](media/nbody.gif)
+![fgif](media/falling_sand.gif)
