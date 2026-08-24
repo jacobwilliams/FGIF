@@ -48,3 +48,4 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 ![falling_sand](media/falling_sand.gif)
 ![boids](media/boids.gif)
 ![pathfinding](media/pathfinding.gif)
+![rotating_sphere](media/rotating_sphere.gif)
