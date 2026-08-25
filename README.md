@@ -75,3 +75,9 @@ The latest API documentation can be found [here](http://jacobwilliams.github.io/
 
 ### Rotating wireframe sphere
 ![rotating_sphere](media/rotating_sphere.gif)
+
+### Bouncing balls
+![bouncing_balls](media/bouncing_balls.gif)
+
+### Breakout game
+![breakout_game](media/breakout_game.gif)
