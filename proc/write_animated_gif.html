@@ -1,0 +1,651 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Create Animated GIFs with Fortran">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>write_animated_gif &ndash; fgif</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">fgif </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../sourcefile/gif_module.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>write_animated_gif
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+            <li class="list-inline-item" id="meta-author"><i class="fa fa-pencil"></i> Jacob Williams</li>
+            <li class="list-inline-item" id="meta-date"><i class="fa fa-calendar-o"></i> 7/27/2014</li>
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="100.0% of total for procedures.">180 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/gif_module.f90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/gif_module.f90.html'>gif_module.f90</a></li>
+                <li class="breadcrumb-item"><a href='../module/gif_module.html'>gif_module</a></li>
+            <li class="breadcrumb-item active" aria-current="page">write_animated_gif</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/write_animated_gif.html#src">write_animated_gif</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  subroutine write_animated_gif(filename, pixel, colormap, transparent, delay)  
+</h2>
+    
+
+    <p>Writes gif89 image, given pixel array and color map
+  This version can create an animated gif:</p>
+<ul>
+<li>The pixel matrix is rank 3: image i is pixel(i,:,:)</li>
+<li>If size(pixel,1) is 1, then a regular gif is produced.</li>
+</ul>
+<h1>See also</h1>
+<ol>
+<li><a href="http://fortranwiki.org/fortran/show/writegif">writegif</a></li>
+<li><a href="http://www.onicos.com/staff/iz/formats/gif.html#aeb">GIF format</a></li>
+<li><a href="http://www.fileformat.info/format/gif/egff.htm">GIF File Format Summary</a></li>
+</ol>
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-filename"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>filename</strong></td>
+            <td>
+                <p>file to create or replace</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pixel"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:,:,:)
+            </td>
+            <td>::</td>
+            <td><strong>pixel</strong></td>
+            <td>
+                <p>pixel values [0 to ncol]</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-colormap"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:,0:)
+            </td>
+            <td>::</td>
+            <td><strong>colormap</strong></td>
+            <td>
+                <p>[r,g,b (0:255)] , [0:ncol] colors</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-transparent"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>transparent</strong></td>
+            <td>
+                <p>transparent color</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delay"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delay</strong></td>
+            <td>
+                <p>delay time [1/100 of seconds]</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+
+
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">write_animated_gif</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">pixel</span><span class="p">,</span><span class="n">colormap</span><span class="p">,</span><span class="n">transparent</span><span class="p">,</span><span class="n">delay</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">         </span><span class="kd">::</span><span class="w"> </span><span class="n">filename</span><span class="w">    </span><span class="c">!! file to create or replace</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:,:,:)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pixel</span><span class="w">       </span><span class="c">!! pixel values [0 to ncol]</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">dimension</span><span class="p">(:,</span><span class="mi">0</span><span class="p">:)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">colormap</span><span class="w">    </span><span class="c">!! [r,g,b (0:255)] , [0:ncol] colors</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">         </span><span class="kd">::</span><span class="w"> </span><span class="n">transparent</span><span class="w"> </span><span class="c">!! transparent color</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span><span class="w">         </span><span class="kd">::</span><span class="w"> </span><span class="n">delay</span><span class="w">       </span><span class="c">!! delay time [1/100 of seconds]</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">parameter</span><span class="w">     </span><span class="kd">::</span><span class="w"> </span><span class="n">bufend</span><span class="o">=</span><span class="mi">260</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">bufend</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">buf</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w">               </span><span class="kd">::</span><span class="w"> </span><span class="n">ibuf</span><span class="w"> </span><span class="c">! output buffer vars</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">parameter</span><span class="w">     </span><span class="kd">::</span><span class="w"> </span><span class="n">maxcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4095</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">parameter</span><span class="w">     </span><span class="kd">::</span><span class="w"> </span><span class="n">nocode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxcode</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="c">!! definitions for lzw</span>
+
+<span class="w">    </span><span class="c">! define lzw code tables for hashing:</span>
+<span class="w">    </span><span class="c">!</span>
+<span class="w">    </span><span class="c">! for any code p, which codes for a sequence af pixel-values, endbyte(p)</span>
+<span class="w">    </span><span class="c">! is the last pixel-value, follow(p) points to another code (if it exists)</span>
+<span class="w">    </span><span class="c">! which codes for this same sequence, but with one more pixel-value</span>
+<span class="w">    </span><span class="c">! appended.</span>
+<span class="w">    </span><span class="c">!   for each code p, next(p) points to another code which codes for a</span>
+<span class="w">    </span><span class="c">! similar sequence with only the endbyte different. this is a hashing</span>
+<span class="w">    </span><span class="c">! pointer, for fast look-up.</span>
+<span class="w">    </span><span class="c">!   all pointers are 'nocode' if they point to nothing</span>
+<span class="w">    </span><span class="c">!</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">maxcode</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">endbyte</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">maxcode</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">follow</span><span class="p">,</span><span class="w"> </span><span class="n">next</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncod</span><span class="p">,</span><span class="w"> </span><span class="n">curmaxcode</span><span class="p">,</span><span class="w"> </span><span class="n">eoi</span><span class="p">,</span><span class="w"> </span><span class="n">cc</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="n">maxbase</span><span class="p">,</span><span class="w"> </span><span class="n">skip</span><span class="p">,</span><span class="w"> </span><span class="n">slen</span><span class="p">,</span><span class="w"> </span><span class="n">blen</span><span class="p">,</span><span class="w"> </span><span class="n">accum</span><span class="p">,</span><span class="w"> </span><span class="n">nout</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">infobyte</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">cblen</span><span class="p">,</span><span class="n">hasmap</span><span class="p">,</span><span class="n">maxincol</span><span class="p">,</span><span class="n">istat</span><span class="p">,&amp;</span>
+<span class="w">                </span><span class="n">maxgifcol</span><span class="p">,</span><span class="n">background</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">iunit</span><span class="p">,</span><span class="n">iframe</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">dt</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">t</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">!delay time:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">delay</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delay</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="k">        </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end if</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">!transparency info:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">transparent</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c">!Reserved+Disposal Method+User Input Flag+Transparent Color Flag</span>
+<span class="w">        </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">transparent</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="k">        </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end if</span>
+<span class="k">                </span>
+<span class="k">    open</span><span class="p">(</span><span class="w">    </span><span class="n">newunit</span><span class="o">=</span><span class="n">iunit</span><span class="p">,&amp;</span>
+<span class="w">            </span><span class="k">file</span><span class="o">=</span><span class="nb">trim</span><span class="p">(</span><span class="n">filename</span><span class="p">),&amp;</span>
+<span class="w">            </span><span class="nb">access</span><span class="o">=</span><span class="s1">'STREAM'</span><span class="p">,&amp;</span>
+<span class="w">            </span><span class="n">status</span><span class="o">=</span><span class="s1">'REPLACE'</span><span class="p">,&amp;</span>
+<span class="w">            </span><span class="n">iostat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">istat</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+
+<span class="k">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">pixel</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c">!number of images</span>
+<span class="w">        </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ubound</span><span class="p">(</span><span class="n">pixel</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ubound</span><span class="p">(</span><span class="n">pixel</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">        </span><span class="n">maxincol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ubound</span><span class="p">(</span><span class="n">colormap</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="w">                            </span><span class="c">! find the bitsize, blen, for pixels</span>
+<span class="w">            </span><span class="n">blen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">            </span><span class="n">maxgifcol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">**</span><span class="n">blen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w">         </span><span class="c">! Number of colors has to be power of 2 </span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maxgifcol</span><span class="o">&gt;=</span><span class="n">maxincol</span><span class="p">)</span><span class="w"> </span><span class="k">exit</span><span class="w">   </span><span class="c">! now blen and maxgifcol are correct</span>
+<span class="w">                                            </span><span class="c">! [only up to 256 colors]</span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">!------------</span>
+<span class="w">        </span><span class="c">! GIF Header</span>
+<span class="w">        </span><span class="c">!------------</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="s1">'GIF89a'</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">! create information for screen descriptor</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">transparent</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transparent</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="k">            </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        </span><span class="n">hasmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">cblen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blen</span>
+<span class="w">        </span><span class="n">infobyte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hasmap</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">128</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">cblen</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blen</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">! write the screen descriptor</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">   </span><span class="n">char2</span><span class="p">(</span><span class="n">nx</span><span class="p">),&amp;</span><span class="w">         </span><span class="c">! logical screen width</span>
+<span class="w">                        </span><span class="n">char2</span><span class="p">(</span><span class="n">ny</span><span class="p">),&amp;</span><span class="w">         </span><span class="c">! logical screen height</span>
+<span class="w">                        </span><span class="nb">char</span><span class="p">(</span><span class="n">infobyte</span><span class="p">),&amp;</span><span class="w">    </span><span class="c">! screen and color map information</span>
+<span class="w">                        </span><span class="nb">char</span><span class="p">(</span><span class="n">background</span><span class="p">),&amp;</span><span class="w">  </span><span class="c">! background color index</span>
+<span class="w">                        </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">             </span><span class="c">! pixel aspect ratio</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">! write global colormap</span>
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">maxgifcol</span>
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">  </span><span class="nb">char</span><span class="p">(</span><span class="n">colormap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">maxincol</span><span class="p">))),</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                          </span><span class="nb">char</span><span class="p">(</span><span class="n">colormap</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">maxincol</span><span class="p">))),</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                          </span><span class="nb">char</span><span class="p">(</span><span class="n">colormap</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">maxincol</span><span class="p">)))</span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="k">    </span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">    </span><span class="c">!it is an animated gif</span>
+<span class="w">    </span>
+<span class="w">            </span><span class="c">!-----------------------------</span>
+<span class="w">            </span><span class="c">! Application Extension Block</span>
+<span class="w">            </span><span class="c">!-----------------------------</span>
+<span class="w">    </span>
+<span class="w">            </span><span class="c">! See: http://odur.let.rug.nl/kleiweg/gif/netscape.html</span>
+<span class="w">    </span>
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">   </span><span class="s1">'!'</span><span class="p">,&amp;</span><span class="w">           </span><span class="c">! Extension Introducer (0x21)</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">),&amp;</span><span class="w">     </span><span class="c">! GIF Extension code</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">11</span><span class="p">),&amp;</span><span class="w">      </span><span class="c">! Length of Application Block</span>
+<span class="w">                            </span><span class="s1">'NETSCAPE'</span><span class="p">,&amp;</span><span class="w">    </span><span class="c">! Application Identifier</span>
+<span class="w">                            </span><span class="s1">'2.0'</span><span class="p">,&amp;</span><span class="w">         </span><span class="c">! Application Authentication Code</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">3</span><span class="p">),&amp;</span><span class="w">       </span><span class="c">! Length of Data Sub-Block</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">1</span><span class="p">),&amp;</span><span class="w">        </span><span class="c">! 1 (0x01)</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">),&amp;</span><span class="w">       </span><span class="c">! number of loop iterations</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">),&amp;</span><span class="w">       </span><span class="c">! Data Sub-Block Terminator</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">         </span><span class="c">! Block Terminator (0x00)</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">!each frame of the animated gif:</span>
+<span class="w">        </span><span class="k">do </span><span class="n">iframe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+<span class="w">                </span>
+<span class="w">            </span><span class="c">!---------------------------------</span>
+<span class="w">            </span><span class="c">! Graphic Control Extension Block</span>
+<span class="w">            </span><span class="c">!---------------------------------</span>
+<span class="w">        </span>
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">   </span><span class="s1">'!'</span><span class="p">,&amp;</span><span class="w">           </span><span class="c">! Extension Introducer (0x21)</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">249</span><span class="p">),&amp;</span><span class="w">    </span><span class="c">! Graphic Control Label (0xF9)</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">4</span><span class="p">),&amp;</span><span class="w">      </span><span class="c">! Block Size (0x04)</span>
+<span class="w">                            </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">),&amp;</span><span class="w">         </span><span class="c">!</span>
+<span class="w">                            </span><span class="n">char2</span><span class="p">(</span><span class="n">dt</span><span class="p">),&amp;</span><span class="w">    </span><span class="c">! Delay Time</span>
+<span class="w">                            </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">),&amp;</span><span class="w">         </span><span class="c">! Transparent Color Index</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">        </span><span class="c">! Block Terminator (0x00)</span>
+
+<span class="w">            </span><span class="c">!-------------</span>
+<span class="w">            </span><span class="c">! Image Block</span>
+<span class="w">            </span><span class="c">!-------------</span>
+
+<span class="w">            </span><span class="c">! now create and write image descriptor</span>
+<span class="w">            </span><span class="n">hasmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">infobyte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hasmap</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">128</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blen</span><span class="o">-</span><span class="mi">1</span><span class="w">    </span><span class="c">! add 64, if interlaced</span>
+<span class="w"> </span>
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">   </span><span class="s1">','</span><span class="p">,&amp;</span><span class="w">            </span><span class="c">! Image Separator (0x2C)</span>
+<span class="w">                            </span><span class="n">char2</span><span class="p">(</span><span class="mi">0</span><span class="p">),&amp;</span><span class="w">      </span><span class="c">! Image Left Position</span>
+<span class="w">                            </span><span class="n">char2</span><span class="p">(</span><span class="mi">0</span><span class="p">),&amp;</span><span class="w">      </span><span class="c">! Image Top Position</span>
+<span class="w">                            </span><span class="n">char2</span><span class="p">(</span><span class="n">nx</span><span class="p">),&amp;</span><span class="w">     </span><span class="c">! Image Width</span>
+<span class="w">                            </span><span class="n">char2</span><span class="p">(</span><span class="n">ny</span><span class="p">),&amp;</span><span class="w">     </span><span class="c">! Image Height</span>
+<span class="w">                            </span><span class="nb">char</span><span class="p">(</span><span class="n">infobyte</span><span class="p">)</span><span class="w">  </span><span class="c">! Image and Color Table Data Information</span>
+<span class="w">                </span>
+<span class="w">            </span><span class="k">call </span><span class="n">giflzw</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="n">pixel</span><span class="p">(</span><span class="n">iframe</span><span class="p">,:,:))</span><span class="w">  </span><span class="c">! now the raster data</span>
+
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">    </span><span class="c">! Block Terminator (0x00)</span>
+<span class="w">            </span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c">!---------</span>
+<span class="w">        </span><span class="c">! Trailer</span>
+<span class="w">        </span><span class="c">!---------</span>
+
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="s1">';'</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">else</span>
+<span class="k">        write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">'Error opening :'</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end if</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">!close the gif file:</span>
+<span class="w">    </span><span class="k">close</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">iunit</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">contains</span>
+<span class="c">!*****************************************************************************************</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+<span class="w">    </span><span class="c">!&gt;</span>
+<span class="w">    </span><span class="c">!  Convert the two least sig bytes of an integer to a 2-character string</span>
+
+<span class="w">        </span><span class="k">function </span><span class="n">char2</span><span class="p">(</span><span class="n">ival</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ival</span>
+<span class="w">        </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w">    </span><span class="kd">::</span><span class="w"> </span><span class="n">c</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">achar</span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">ival</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="nb">achar</span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">ival</span><span class="o">/</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="k">end function </span><span class="n">char2</span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+<span class="w">    </span><span class="c">!&gt;</span>
+<span class="w">    </span><span class="c">!  Flushes up to 255 bytes to output file if buffer contains data, keeping</span>
+<span class="w">    </span><span class="c">!  rest of data in buffer. If skip&gt;0 there is a partially filled last byte</span>
+<span class="w">    </span><span class="c">!  in buf[ibuf]. This byte will be written only if ibuf&lt;256. That should be</span>
+<span class="w">    </span><span class="c">!  the last call to flushbuffer.</span>
+
+<span class="w">        </span><span class="k">subroutine </span><span class="n">flushbuffer</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span>
+
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iunit</span><span class="w">   </span><span class="c">!! i/o unit to use</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bl</span><span class="w">   </span><span class="c">!! number of bytes to write (to be determined)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ibuf</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">     </span><span class="c">! we will write buf[1..255]</span>
+<span class="w">            </span><span class="n">bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span>
+<span class="w">        </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">! buf[ibuf] is partially used, write buf[1..ibuf]</span>
+<span class="w">            </span><span class="n">bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibuf</span>
+<span class="w">        </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">ibuf</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">  </span><span class="c">! write buf[1..ibuf-1], there is no partial byte</span>
+<span class="w">            </span><span class="n">bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibuf</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="k">else</span><span class="w">                     </span><span class="c">! nothing to write</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="k">        end if</span>
+
+<span class="k">        write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">bl</span><span class="p">)</span>
+<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="n">buf</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">bl</span><span class="p">)</span>
+<span class="w">        </span><span class="n">buf</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ibuf</span><span class="o">-</span><span class="n">bl</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf</span><span class="p">(</span><span class="n">bl</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">ibuf</span><span class="p">)</span><span class="w"> </span><span class="c">! shift down remaining data</span>
+<span class="w">        </span><span class="n">ibuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bl</span>
+
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">flushbuffer</span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+<span class="w">    </span><span class="c">!&gt;</span>
+<span class="w">    </span><span class="c">!  routine for LZW coding</span>
+
+<span class="w">        </span><span class="k">subroutine </span><span class="n">giflzw</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">pixel</span><span class="p">)</span><span class="w">          </span>
+
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                 </span><span class="kd">::</span><span class="w"> </span><span class="n">iunit</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:,:)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pixel</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">                             </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">                             </span><span class="kd">::</span><span class="w"> </span><span class="n">j</span>
+
+<span class="w">        </span><span class="n">nout</span><span class="o">=</span><span class="mi">0</span><span class="w">                        </span><span class="c">! for counting the codes going out</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">blen</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">blen</span><span class="o">=</span><span class="mi">2</span><span class="w">                    </span><span class="c">! pixel code-length, 2 is minimum for gif</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        write</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">blen</span><span class="p">)</span>
+<span class="w">        </span><span class="n">maxbase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">**</span><span class="n">blen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">call </span><span class="n">inittable</span><span class="p">()</span>
+<span class="w">        </span><span class="k">call </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">cc</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">ubound</span><span class="p">(</span><span class="n">pixel</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">ubound</span><span class="p">(</span><span class="n">pixel</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">modulo</span><span class="p">(</span><span class="n">pixel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="w"> </span><span class="n">maxbase</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w">    </span><span class="c">! take next byte, prevent overflow</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">j</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="w">                       </span><span class="c">! first raster byte has one-byte code p</span>
+<span class="w">                    </span><span class="k">cycle</span><span class="w">                       </span><span class="c">! for the first byte no further action</span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="w">                                            </span><span class="c">! now see if code exists for sequence [.p.]k</span>
+<span class="w">                </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">follow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">           </span><span class="c">! [.p.]k is "string coded by p" followed by k</span>
+<span class="w">                </span><span class="n">childloop</span><span class="p">:</span><span class="w"> </span><span class="k">do</span>
+<span class="k">                    if</span><span class="w"> </span><span class="p">((</span><span class="n">child</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nocode</span><span class="p">)</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="nb">ichar</span><span class="p">(</span><span class="n">endbyte</span><span class="p">(</span><span class="n">child</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                        exit </span><span class="n">childloop</span>
+<span class="w">                    </span><span class="k">end if</span>
+<span class="k">                    </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end do </span><span class="n">childloop</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">child</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">nocode</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">    </span><span class="c">! if code for [.p.]k was found, store it in p</span>
+<span class="w">                    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">child</span>
+<span class="w">                </span><span class="k">else</span><span class="w">                         </span><span class="c">! if not: output p and create code for [.p.]k</span>
+<span class="w">                    </span><span class="k">call </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ncod</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxcode</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">        </span><span class="c">! check if a new code can be added</span>
+<span class="w">                        </span><span class="k">call </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">cc</span><span class="p">)</span><span class="w">  </span><span class="c">! if not: tell listener to clear table</span>
+<span class="w">                        </span><span class="k">call </span><span class="n">inittable</span><span class="p">()</span><span class="w">            </span><span class="c">! and clear our own table</span>
+<span class="w">                    </span><span class="k">else</span>
+<span class="k">                        if</span><span class="w"> </span><span class="p">(</span><span class="n">ncod</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">curmaxcode</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                            </span><span class="n">slen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slen</span><span class="o">+</span><span class="mi">1</span><span class="w">               </span><span class="c">! new codes will be one bit longer</span>
+<span class="w">                            </span><span class="n">curmaxcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curmaxcode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c">! and more codes are possible</span>
+<span class="w">                        </span><span class="k">end if</span>
+<span class="k">                        </span><span class="n">endbyte</span><span class="p">(</span><span class="n">ncod</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w">   </span><span class="c">! ncod is the new code for [.p.]k</span>
+<span class="w">                        </span><span class="n">follow</span><span class="p">(</span><span class="n">ncod</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nocode</span>
+<span class="w">                        </span><span class="n">next</span><span class="p">(</span><span class="n">ncod</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">follow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w">    </span><span class="c">! include ncod in the hashing list</span>
+<span class="w">                        </span><span class="n">follow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncod</span><span class="w">          </span><span class="c">!     of codes with same start-sequence</span>
+<span class="w">                        </span><span class="n">ncod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncod</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">                    </span><span class="k">end if</span>
+<span class="k">                    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    </span>
+<span class="k">        call </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w">      </span><span class="c">! send the last code to buffer</span>
+<span class="w">        </span><span class="k">call </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">eoi</span><span class="p">)</span><span class="w">    </span><span class="c">! send 'end of image' to buffer</span>
+<span class="w">        </span><span class="k">call </span><span class="n">flushbuffer</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">        </span><span class="c">! extra flush, including partial last byte</span>
+
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">giflzw</span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+<span class="w">    </span><span class="c">!&gt;</span>
+<span class="w">    </span><span class="c">!  Initialize table.</span>
+
+<span class="w">        </span><span class="k">subroutine </span><span class="n">inittable</span><span class="p">()</span>
+
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">maxbase</span><span class="w">                  </span><span class="c">! start with defining the codes 0..maxbase</span>
+<span class="w">            </span><span class="n">endbyte</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">        </span><span class="c">! for one-pixel sequences (code=pixelvalue)</span>
+<span class="w">        </span><span class="k">end do</span><span class="w">                          </span><span class="c">! initially no multi-pixel codes exist</span>
+<span class="w">        </span><span class="n">follow</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">maxbase</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nocode</span>
+<span class="w">        </span><span class="n">next</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">maxbase</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nocode</span>
+<span class="w">        </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxbase</span><span class="o">+</span><span class="mi">1</span><span class="w">                  </span><span class="c">! 'clear code-tabel', a control code</span>
+<span class="w">        </span><span class="n">eoi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxbase</span><span class="o">+</span><span class="mi">2</span><span class="w">                 </span><span class="c">! 'end of image', another control code</span>
+<span class="w">        </span><span class="n">ncod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w">                   </span><span class="c">! ncod = number of currently defined codes</span>
+<span class="w">        </span><span class="n">slen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">                 </span><span class="c">! current number of bits to write one code</span>
+<span class="w">        </span><span class="n">curmaxcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">**</span><span class="n">slen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w">        </span><span class="c">! currently the highest, until slen increases</span>
+
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">inittable</span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+<span class="w">    </span><span class="c">!&gt;</span>
+<span class="w">    </span><span class="c">!  add some bits (a 'slice') to output buffer</span>
+
+<span class="w">        </span><span class="k">subroutine </span><span class="n">slicewrite</span><span class="p">(</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">iunit</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">code</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nout</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">             </span><span class="c">! initiate output buffer</span>
+<span class="w">            </span><span class="n">ibuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">accum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        </span><span class="n">nout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nout</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="w">        </span><span class="n">accum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">**</span><span class="n">skip</span><span class="w">  </span><span class="c">! add bits at correct position in accum</span>
+<span class="w">        </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">slen</span><span class="w">              </span><span class="c">! slen is current slice length, in bits</span>
+
+<span class="w">        </span><span class="n">shiftout</span><span class="p">:</span><span class="w"> </span><span class="k">do</span>
+<span class="k">            </span><span class="n">buf</span><span class="p">(</span><span class="n">ibuf</span><span class="p">:</span><span class="n">ibuf</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="nb">modulo</span><span class="p">(</span><span class="n">accum</span><span class="p">,</span><span class="mi">256</span><span class="p">))</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">exit </span><span class="n">shiftout</span>
+<span class="w">            </span><span class="n">ibuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibuf</span><span class="o">+</span><span class="mi">1</span><span class="w">               </span><span class="c">! last written buffer-byte is now permanent</span>
+<span class="w">            </span><span class="n">accum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accum</span><span class="o">/</span><span class="mi">256</span><span class="w">           </span><span class="c">! remove that byte from accum</span>
+<span class="w">            </span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skip</span><span class="o">-</span><span class="mi">8</span><span class="w">               </span><span class="c">! skip points to next bit to write in accum</span>
+<span class="w">        </span><span class="k">end do </span><span class="n">shiftout</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ibuf</span><span class="o">&gt;</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            call </span><span class="n">flushbuffer</span><span class="p">(</span><span class="n">iunit</span><span class="p">)</span><span class="w">    </span><span class="c">! won't write unfinished byte in buf[ibuf]</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c">! at most 255 bytes will be left in buffer</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="k">end subroutine </span><span class="n">slicewrite</span>
+<span class="w">    </span><span class="c">!*************************************************************************************</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">write_animated_gif</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              fgif
+ was developed by Jacob Williams<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>
